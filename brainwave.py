@@ -1,6 +1,10 @@
 import numpy as np
 import pandas as pd
 import os, time
+from sklearn.linear_model import LinearRegression
+import warnings
+
+warnings.filterwarnings('ignore')
 
 print("""
         options : following operations may performed by this function
@@ -42,6 +46,38 @@ def getPrompt():
 ##        predictions            ##
 ###################################
 
+def linearReg(data):
+    reg = LinearRegression()
+    # so just i can fit the 2d array
+    col1_dummy = input("enter the features to use in prediction (use \";\" for separation) : ")
+    col1 = [colvar.strip() for colvar in col1_dummy.split(";")]
+    col2 = input("enter the second column to fit : ")
+    
+    try:
+        reg.fit(data[col1], data[col2])
+    except ValueError:
+        print("Invalid feature column(s) specified. Please try again.")
+        return
+    
+    while True:
+        predict_val = input("enter the value to predict : ")
+        predict_val = float(predict_val)
+        if isinstance(predict_val,int) or isinstance(predict_val,float):
+            predict_val = np.array([[float(predict_val)]])
+            print([[float(reg.predict(predict_val))]])
+        else:
+            print("please enter float or integer value")
+
+        ask = input("wanna use again (y/n) : ")
+        if ask == 'n':
+            break
+        else:
+            continue
+
+    
+
+
+
 def models(data):
     print("""
         following models you can use directly
@@ -70,7 +106,7 @@ def models(data):
     """)
     choice = input("select the model by their assined int numbers : ")
     if choice == '1':
-        print('1')
+        linearReg(data)
     elif choice == '2':
         print('2')
     else:
