@@ -25,6 +25,19 @@ def mean(data):
             means[col] = data[col].mean()
     print(means)
 
+def median(data):
+    columns = input("enter the columns (use \";\" as separator) : ").split(";")
+    medians = {}
+    for col in columns:
+        if col not in data.columns:
+            print(f"There is no column named {col}.")
+        else:
+            medians[col] = data[col].median()
+    print(medians)
+
+def dataInfo(data):
+    print(data.info())
+
 def showHead(data):
     print(data.head())
 
@@ -41,38 +54,80 @@ def getPrompt():
     prompt = "𝖇𝖗𝖆𝖎𝖓𝖜𝖆𝖛𝖊>> \b\b\b\b\b\b\b\b\b\b"
     return prompt
 
+def plotter(mode="simple"):
+    if mode=="simple":
+        print("hello")
+    else:
+        print("bye")
+
 #apply prediction stuff here 
 ###################################
 ##        predictions            ##
 ###################################
 
 def linearReg(data):
-    reg = LinearRegression()
-    # so just i can fit the 2d array
-    col1_dummy = input("enter the features to use in prediction (use \";\" for separation) : ")
-    col1 = [colvar.strip() for colvar in col1_dummy.split(";")]
-    col2 = input("enter the second column to fit : ")
     
-    try:
-        reg.fit(data[col1], data[col2])
-    except ValueError:
-        print("Invalid feature column(s) specified. Please try again.")
-        return
-    
-    while True:
-        predict_val = input("enter the value to predict : ")
-        predict_val = float(predict_val)
-        if isinstance(predict_val,int) or isinstance(predict_val,float):
-            predict_val = np.array([[float(predict_val)]])
-            print([[float(reg.predict(predict_val))]])
-        else:
-            print("please enter float or integer value")
+    print("Note: <hey there are two kind of linear regression >")
+    print("Which one you want")
+    anss = int(input("1. single linear regression\n2. multiple linear regression\nchoose (1 or 2) : "))
 
-        ask = input("wanna use again (y/n) : ")
-        if ask == 'n':
-            break
-        else:
-            continue
+    if anss == 1:
+        print("<========single linear regression========>")
+        feature = input("Enter the feature to use in prediction : ")
+        target = input("enter the target value aka 'y' : ")
+
+        print("#################################################")
+        print(f"you entered this feature <{feature}>" )
+        print(f"you entered this target <{target}>")
+        print("#################################################")
+
+        X = np.array(data[feature]).reshape(-1,1)
+        y = np.array(data[target]).reshape(-1,1)
+        reg = LinearRegression()
+        reg.fit(X,y)
+        print("<========data fitted successfully========>")
+
+        while True:
+            predict_val = input("enter the value for respective feature you entered before : ")
+            print(f"predicted value is <{reg.predict(np.array(predict_val).reshape(-1,1).astype(float))}>")
+
+            ans = input("wanna predict again? (y/n) : ")
+            if ans == "y":
+                continue
+            else:
+                break
+    else:
+        print("<========multiple linear regression========>")
+        features_dummy = input("Enter the features to use in prediction (use \";\" for separation): ")
+        features = features_dummy.split(';')
+
+        target = input("enter the target value aka 'y' : ")
+
+        print("\t#################################################")
+        print(f"\tyou entered these features <{features}>" )
+        print(f"\tyou entered this target <{target}>")
+        print("\t#################################################")
+
+        X = data[features]
+        print(f"number of features entered <{X.shape[1]}>")
+        y = data[target]
+        reg = LinearRegression()
+        reg.fit(X,y)
+        print("<========data fitted successfully========>")
+
+        while True:
+            predict_val_dummy = input("enter the values for respective features you entered before : ")
+            predict_val = [int(i) for i in predict_val_dummy.split(";")]
+            print(f"predicted value is <{reg.predict([predict_val])}>")
+
+            ans = input("wanna predict again? (y/n) : ")
+            if ans == "y":
+                continue
+            else:
+                break
+        
+    
+
 
     
 
@@ -114,7 +169,7 @@ def models(data):
 
 
 ###################################
-##        predictions            ##
+##        /predictions           ##
 ###################################
 
 
@@ -140,6 +195,12 @@ while True:
             showColumns(data)
         elif inp == 'models':
             models(data)
+        elif inp == 'median':
+            median(data)
+        elif inp == 'info':
+            dataInfo(data)
+        elif inp == 'clear':
+            os.system('cls' if os.name == 'nt' else 'clear')
         elif inp == 'exit':
             print('hey i see yah man next time i\'ll be more cool than now i am')
             break
