@@ -127,9 +127,10 @@ def linearReg(data):
                 break
         
     
+def polynomReg(data):
+    print("hey i've the data not the further instruction what i do")
 
 
-    
 
 
 
@@ -160,12 +161,16 @@ def models(data):
         22. Quantative Regression
     """)
     choice = input("select the model by their assined int numbers : ")
-    if choice == '1':
-        linearReg(data)
-    elif choice == '2':
-        print('2')
-    else:
-        print('not valid')
+    try:
+        if choice == '1':
+            linearReg(data)
+        elif choice == '2':
+            polynomReg()
+        else:
+            print('not valid')
+    except Exception as err:
+        print("hey i didn't get what you want")
+        
 
 
 ###################################
@@ -201,6 +206,8 @@ while True:
             dataInfo(data)
         elif inp == 'clear':
             os.system('cls' if os.name == 'nt' else 'clear')
+        elif inp == '':
+            print("some")
         elif inp == 'exit':
             print('hey i see yah man next time i\'ll be more cool than now i am')
             break
