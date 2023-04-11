@@ -128,7 +128,7 @@ def linearReg(data):
         
     
 def polynomReg(data):
-    print("hey i've the data not the further instruction what i do")
+    print(data)
 
 
 
@@ -207,7 +207,7 @@ while True:
         elif inp == 'clear':
             os.system('cls' if os.name == 'nt' else 'clear')
         elif inp == '':
-            print("some")
+            print("huh how many times i told you that you must have to enter commands here don't you just understand")
         elif inp == 'exit':
             print('hey i see yah man next time i\'ll be more cool than now i am')
             break
