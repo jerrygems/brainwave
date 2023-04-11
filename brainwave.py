@@ -130,6 +130,15 @@ def linearReg(data):
 def polynomReg(data):
     print(data)
 
+def RidgeReg(data):
+    print()
+
+def LassoReg(data):
+    print("hell")
+
+def ElasticNetReg(data):
+    print("hell")
+
 
 
 
