@@ -139,7 +139,20 @@ def LassoReg(data):
 def ElasticNetReg(data):
     print("hell")
 
+def LogisticReg(data)
+    print("hell")
 
+def PoissonReg(data):
+    print("hell")
+
+def CoxReg(data):
+    print("hell")
+
+def SupportVectReg(data):
+    print("hell")
+
+def DecisionTreeReg(data):
+    print("hell")
 
 
 
