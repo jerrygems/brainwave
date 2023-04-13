@@ -87,6 +87,9 @@ def linearReg(data):
         reg.fit(X,y)
         print("<========data fitted successfully========>")
 
+        print(f"So you coeficient is {reg.coef_} and intercept is {reg.intercept_}")
+        print(f"Model performance {reg.score()}")
+
         while True:
             predict_val = input("enter the value for respective feature you entered before : ")
             print(f"predicted value is <{reg.predict(np.array(predict_val).reshape(-1,1).astype(float))}>")
@@ -115,6 +118,8 @@ def linearReg(data):
         reg.fit(X,y)
         print("<========data fitted successfully========>")
 
+        print(f"So you coeficients are {reg.coef_} and intercept is {reg.intercept_}")
+
         while True:
             predict_val_dummy = input("enter the values for respective features you entered before : ")
             predict_val = [int(i) for i in predict_val_dummy.split(";")]
@@ -128,10 +133,10 @@ def linearReg(data):
         
     
 def polynomReg(data):
-    print(data)
+    print("hell")
 
 def RidgeReg(data):
-    print()
+    print("hell")
 
 def LassoReg(data):
     print("hell")
@@ -139,7 +144,7 @@ def LassoReg(data):
 def ElasticNetReg(data):
     print("hell")
 
-def LogisticReg(data)
+def LogisticReg(data):
     print("hell")
 
 def PoissonReg(data):
