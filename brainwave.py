@@ -70,10 +70,10 @@ def linearReg(data):
     
     print("Note: <hey there are two kind of linear regression >")
     print("Which one you want")
-    anss = int(input("1. single linear regression\n2. multiple linear regression\nchoose (1 or 2) : "))
+    anss = int(input("1. simple linear regression\n2. multiple linear regression\nchoose (1 or 2) : "))
 
     if anss == 1:
-        print("<========single linear regression========>")
+        print("<========simple linear regression========>")
         feature = input("Enter the feature to use in prediction : ")
         target = input("enter the target value aka 'y' : ")
 
