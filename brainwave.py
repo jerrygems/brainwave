@@ -1,9 +1,10 @@
 import numpy as np
 import pandas as pd
 import os, time
+from sklearn.preprocessing import PolynomialFeatures
 from sklearn.linear_model import LinearRegression
+import matplotlib.pyplot as plt
 import warnings
-
 warnings.filterwarnings('ignore')
 
 print("""
@@ -51,7 +52,7 @@ def showColumns(data):
     print(data.columns)
 
 def getPrompt():
-    prompt = "𝖇𝖗𝖆𝖎𝖓𝖜𝖆𝖛𝖊>> \b\b\b\b\b\b\b\b\b\b"
+    prompt = "𝖇𝖗𝖆𝖎𝖓𝖜𝖆𝖛𝖊🧠>> \b\b\b\b\b\b\b\b\b\b"
     return prompt
 
 def plotter(mode="simple"):
@@ -91,7 +92,7 @@ def linearReg(data):
         print(f"Model performance {reg.score()}")
 
         while True:
-            predict_val = input("enter the value for respective feature you entered before : ")
+            predict_val = input("enter the value for respective {feature} you entered before : ")
             print(f"predicted value is <{reg.predict(np.array(predict_val).reshape(-1,1).astype(float))}>")
 
             ans = input("wanna predict again? (y/n) : ")
@@ -121,7 +122,7 @@ def linearReg(data):
         print(f"So you coeficients are {reg.coef_} and intercept is {reg.intercept_}")
 
         while True:
-            predict_val_dummy = input("enter the values for respective features you entered before : ")
+            predict_val_dummy = input("enter the values for respective {features} you entered before : ")
             predict_val = [int(i) for i in predict_val_dummy.split(";")]
             print(f"predicted value is <{reg.predict([predict_val])}>")
 
@@ -133,7 +134,38 @@ def linearReg(data):
         
     
 def polynomReg(data):
-    print("hell")
+    degree = int(input("enter the the degree of the polynomial : "))
+    features = input("enter the name of features separated by (';') : ")
+    features = [name.strip() for name in features.split(";") ]
+    target = input("enter the name of target variable : ")
+    
+    X = data[features].values
+    y = data[target].values
+
+    poly = PolynomialFeatures(degree)
+    X_poly = poly.fit_transform(X)
+
+    model = LinearRegression()
+    model.fit(X_poly,y)
+
+    print(f"Coefficients: {model.coef_}")
+    print(f"Intercept: {model.intercept_}")
+    print(f"R^2 score: {model.score(X_poly, y)}")
+
+    while True:
+        values = input(f"Enter the values of {features} (separated by semicolons): ")
+        values = [float(value.strip()) for value in values.split(";")]
+        X_predict = np.array(values).reshape(1,-1)
+        X_predict_poly = poly.transform(X_predict)
+
+        y_pred = model.predict(X_predict_poly)
+        print(f"Predicted values {y_pred[0]}")
+
+        ans = input("Do you want to predict another value? (y/n): ")
+        if ans.lower() == 'y':
+            continue
+        else:
+            break
 
 def RidgeReg(data):
     print("hell")
@@ -192,11 +224,11 @@ def models(data):
         if choice == '1':
             linearReg(data)
         elif choice == '2':
-            polynomReg()
+            polynomReg(data)
         else:
             print('not valid')
     except Exception as err:
-        print("hey i didn't get what you want")
+        print(f"hey i didn't get what you want : {err}")
         
 
 
