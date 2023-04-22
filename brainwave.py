@@ -4,6 +4,8 @@ import os, time
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.linear_model import LinearRegression
 import matplotlib.pyplot as plt
+from sklearn.linear_model import Lasso
+from sklearn.linear_model import Ridge
 import warnings
 warnings.filterwarnings('ignore')
 
@@ -107,10 +109,10 @@ def linearReg(data):
 
         target = input("enter the target value aka 'y' : ")
 
-        print("\t#################################################")
+        print("\t<========================================>")
         print(f"\tyou entered these features <{features}>" )
         print(f"\tyou entered this target <{target}>")
-        print("\t#################################################")
+        print("\t<========================================>")
 
         X = data[features]
         print(f"number of features entered <{X.shape[1]}>")
@@ -155,7 +157,7 @@ def polynomReg(data):
     while True:
         values = input(f"Enter the values of {features} (separated by semicolons): ")
         values = [float(value.strip()) for value in values.split(";")]
-        X_predict = np.array(values).reshape(1,-1)
+        X_predict = np.array(values).reshape(-1,1)
         X_predict_poly = poly.transform(X_predict)
 
         y_pred = model.predict(X_predict_poly)
@@ -168,10 +170,64 @@ def polynomReg(data):
             break
 
 def RidgeReg(data):
-    print("hell")
+    features = input("enter the name of features separated by (';') : ")
+    features = [name.strip() for name in features.split(";") ]
+    target = input("enter the name of target variable : ")
+
+
+    X = data[features]
+    y = data[target]
+
+    print("\t<========hey thanks for entering the values========>\n\tbut you know Lasso Regression requires some parameters\n\t check parameters")
+    reg_ridge = Ridge(alpha=40, max_iter=1000, tol=0.1)
+    reg_ridge = reg_ridge.fit(X,y)
+    print("\t<========model fitted successfully========>")
+    reg_ridge.score(X,y)
+
+    while True:
+        values = input(f"Enter the values of {features} (separated by semicolons): ")
+        values = [float(value.strip()) for value in values.split(";")]
+        values = np.array(values).reshape(1,-1)
+
+        predictions = reg_ridge.predict(values)
+        print(f"Predicted values {predictions[0]}")
+
+        ans = input("Do you want to predict another value? (y/n): ")
+        if ans.lower() == 'y':
+            continue
+        else:
+            break
 
 def LassoReg(data):
-    print("hell")
+    features = input("enter the name of features separated by (';') : ")
+    features = [name.strip() for name in features.split(";") ]
+    target = input("enter the name of target variable : ")
+
+
+    X = data[features]
+    y = data[target]
+
+    print("\t<========hey thanks for entering the values========>\n\tbut you know Lasso Regression requires some parameters\n\t check parameters")
+    reg_lasso = Lasso(alpha=40, max_iter=1000, tol=0.1)
+    reg_lasso = reg_lasso.fit(X,y)
+    print("\t<========model fitted successfully========>")
+    reg_lasso.score(X,y)
+
+    while True:
+        values = input(f"Enter the values of {features} (separated by semicolons): ")
+        values = [float(value.strip()) for value in values.split(";")]
+        values = np.array(values).reshape(1,-1)
+
+        predictions = reg_lasso.predict(values)
+        print(f"Predicted values {predictions[0]}")
+
+        ans = input("Do you want to predict another value? (y/n): ")
+        if ans.lower() == 'y':
+            continue
+        else:
+            break
+
+
 
 def ElasticNetReg(data):
     print("hell")
@@ -225,6 +281,10 @@ def models(data):
             linearReg(data)
         elif choice == '2':
             polynomReg(data)
+        elif choice == '3':
+            RidgeReg(data)
+        elif choice == '4':
+            LassoReg(data)
         else:
             print('not valid')
     except Exception as err:
