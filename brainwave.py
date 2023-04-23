@@ -2,10 +2,9 @@ import numpy as np
 import pandas as pd
 import os, time
 from sklearn.preprocessing import PolynomialFeatures
-from sklearn.linear_model import LinearRegression
 import matplotlib.pyplot as plt
-from sklearn.linear_model import Lasso
-from sklearn.linear_model import Ridge
+from sklearn.linear_model import Lasso,Ridge,ElasticNet,LinearRegression
+
 import warnings
 warnings.filterwarnings('ignore')
 
@@ -230,7 +229,31 @@ def LassoReg(data):
 
 
 def ElasticNetReg(data):
-    print("hell")
+    features = input("enter the name of features separated by (';') : ")
+    features = [name.strip() for name in features.split(";") ]
+    target = input("enter the name of target variable : ")
+
+    X = data[features]
+    y = data[target]
+
+    elastic_reg = ElasticNet(random_state=0)
+    elastic_reg.fit(X,y)
+    print("\t<========model fitted successfully========>")
+    elastic_reg.score(X,y)
+
+    while True:
+        values = input(f"Enter the values of {features} (separated by semicolons): ")
+        values = [float(value.strip()) for value in values.split(";")]
+        values = np.array(values).reshape(1,-1)
+        predictions = elastic_reg.predict(values)
+        print(f"Predicted values {predictions[0]}")
+
+        ans = input("Do you want to predict another value? (y/n): ")
+        if ans.lower() == 'y':
+            continue
+        else:
+            break
+
 
 def LogisticReg(data):
     print("hell")
@@ -285,6 +308,8 @@ def models(data):
             RidgeReg(data)
         elif choice == '4':
             LassoReg(data)
+        elif choice == '5':
+            ElasticNetReg(data)
         else:
             print('not valid')
     except Exception as err:
