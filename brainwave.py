@@ -40,6 +40,9 @@ def median(data):
 def dataInfo(data):
     print(data.info())
 
+def showNull(data):
+    print(data.isna().sum())
+
 def showHead(data):
     print(data.head())
 
@@ -332,8 +335,12 @@ def models(data):
 # with open('assets/brain.txt', 'r') as file:
 #     print(file.read())
 
-csv_path = input("Enter the path of the CSV file: ").replace("\"","")
-data = pd.read_csv(csv_path)
+def getFile():
+    csv_path = input("Enter the path of the CSV file: ").replace("\"","")
+    data = pd.read_csv(csv_path)
+    return data
+
+data = getFile()
 
 while True:
     try:
@@ -366,10 +373,14 @@ while True:
             LogisticReg(data)
         elif inp == 'learn':
             tutor()
+        elif inp == 'changeFile':
+            data = getFile()
         elif inp == 'clear':
             os.system('cls' if os.name == 'nt' else 'clear')
         elif inp == 'ls' or inp == 'dir':
             os.system('dir' if os.name == 'nt' else 'ls -al')
+        elif inp == 'showna' or inp == 'show na' or inp == 'showNA':
+            showNull(data)
         elif inp == 'help' or inp == 'help me' or inp == 'please help' or inp == 'Help':
             print("""
                 Usage: following commands can be executed from this script
