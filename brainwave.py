@@ -256,7 +256,9 @@ def ElasticNetReg(data):
 
 
 def LogisticReg(data):
-    print("hell")
+    features = input("enter the name of features separated by (';') : ")
+    features = [name.strip() for name in features.split(";") ]
+    target = input("enter the name of target variable : ")
 
 def PoissonReg(data):
     print("hell")
@@ -270,7 +272,8 @@ def SupportVectReg(data):
 def DecisionTreeReg(data):
     print("hell")
 
-
+def tutor():
+    print('hell')
 
 def models(data):
     print("""
@@ -310,6 +313,8 @@ def models(data):
             LassoReg(data)
         elif choice == '5':
             ElasticNetReg(data)
+        elif choice == '6':
+            LogisticReg()
         else:
             print('not valid')
     except Exception as err:
@@ -320,6 +325,7 @@ def models(data):
 ###################################
 ##        /predictions           ##
 ###################################
+
 
 
 # Print the ASCII art of the brain
@@ -348,8 +354,27 @@ while True:
             median(data)
         elif inp == 'info':
             dataInfo(data)
+        elif inp == 'linearReg':
+            linearReg(data)
+        elif inp == 'polynomReg':
+            polynomReg(data)
+        elif inp == 'ridgeReg':
+            RidgeReg(data)
+        elif inp == 'lassoReg':
+            LassoReg(data)
+        elif inp == 'logisticReg':
+            LogisticReg(data)
+        elif inp == 'learn':
+            tutor()
         elif inp == 'clear':
             os.system('cls' if os.name == 'nt' else 'clear')
+        elif inp == 'ls' or inp == 'dir':
+            os.system('dir' if os.name == 'nt' else 'ls -al')
+        elif inp == 'help' or inp == 'help me' or inp == 'please help' or inp == 'Help':
+            print("""
+                Usage: following commands can be executed from this script
+                \n\t1. mean\n\t2. head\n\t3. tail\n\t4. describe\n\t5. show columns\n\t6. models\n\t7. median\n\t8. info\n\t9. learn\n\t
+            """)
         elif inp == '':
             print("huh how many times i told you that you must have to enter commands here don't you just understand")
         elif inp == 'exit':
