@@ -276,7 +276,7 @@ def DecisionTreeReg(data):
     print("hell")
 
 def tutor():
-    print('hell')
+    print('hey for this feature you\'ll require a file from jerrygems github repo')
 
 def models(data):
     print("""
@@ -384,7 +384,8 @@ while True:
         elif inp == 'help' or inp == 'help me' or inp == 'please help' or inp == 'Help':
             print("""
                 Usage: following commands can be executed from this script
-                \n\t1. mean\n\t2. head\n\t3. tail\n\t4. describe\n\t5. show columns\n\t6. models\n\t7. median\n\t8. info\n\t9. learn\n\t
+                \n\t1. mean\n\t2. head\n\t3. tail\n\t4. describe\n\t5. showNA\n\t6. show columns\n\t7. models\n\t8. median\n\t9. info\n\t10. learn\n\t
+                11. linearReg\n\t12. polynomReg\n\t13. ridgeReg\n\t14. lassoReg\n\t15. logisticReg
             """)
         elif inp == '':
             print("huh how many times i told you that you must have to enter commands here don't you just understand")
