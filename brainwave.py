@@ -1,6 +1,6 @@
 import numpy as np
 import pandas as pd
-import os, time
+import os, time, datetime
 from sklearn.preprocessing import PolynomialFeatures
 import matplotlib.pyplot as plt
 from sklearn.linear_model import Lasso,Ridge,ElasticNet,LinearRegression
@@ -56,7 +56,7 @@ def showColumns(data):
     print(data.columns)
 
 def getPrompt():
-    prompt = "𝖇𝖗𝖆𝖎𝖓𝖜𝖆𝖛𝖊🧠>> \b\b\b\b\b\b\b\b\b\b"
+    prompt = "𝖇𝖗𝖆𝖎𝖓𝖜𝖆𝖛𝖊🧠"
     return prompt
 
 def plotter(mode="simple"):
@@ -64,6 +64,83 @@ def plotter(mode="simple"):
         print("hello")
     else:
         print("bye")
+
+def grafty(data):
+    
+    print("""
+
+        You're in grafty mode
+
+         _______  _______  _______  _______ _________         
+        (  ____ \(  ____ )(  ___  )(  ____ \\\\__   __/|\     /|
+        | (    \/| (    )|| (   ) || (    \/   ) (   ( \   / )
+        | |      | (____)|| (___) || (__       | |    \ (_) / 
+        | | ____ |     __)|  ___  ||  __)      | |     \   /  
+        | | \_  )| (\ (   | (   ) || (         | |      ) (   
+        | (___) || ) \ \__| )   ( || )         | |      | |   
+        (_______)|/   \__/|/     \||/          )_(      \_/   
+        
+        Note:  you may need to hit exit to go back on previous mode
+                                                            
+    """)
+    ##########################
+    ##    definations       ##
+    ##########################
+    def plotGraph(data):
+        colx = input("enter the column for X-axis : ==> ")
+        coly = input("enter the column for Y-axis : ==> ")
+        
+        plt.ion()
+        plt.plot(data[colx],data[coly])
+        plt.show(block=False)
+    
+    def barGraph(data):
+        colx = input("enter the column for X-axis : ==> ")
+        coly = input("enter the column for Y-axis : ==> ")
+
+        plt.ion()
+        plt.bar(range(len(data[colx])),data[colx])
+        plt.xticks(range(len(data[colx])),data[coly])
+        plt.xlabel(colx)
+        plt.ylabel(coly)
+        plt.show(block=False)
+
+    def pieGraph(data):
+        print('plot it')
+
+    def boxGraph(data):
+        print('plot it')
+
+    def histoGraph(data):
+        print('plot it')
+
+    def scatterGraph(data):
+        print('plot it')
+    ##########################
+    ##    /definations      ##
+    ##########################
+    while True:
+        cmd = input(getPrompt() + " grafty>>\b\b\b\b\b\b")
+        if cmd == 'plot':
+            plotGraph(data)
+        elif cmd == 'bar':
+            barGraph(data)
+        elif cmd == 'pie':
+            pieGraph(data)
+        elif cmd == 'box':
+            boxGraph(data)
+        elif cmd == 'histogram':
+            histoGraph(data)
+        elif cmd == 'scatter':
+            scatterGraph(data)
+        elif cmd == 'clean':
+            plt.clf()
+        elif cmd == 'clear':
+            os.system("cls" if os.name == 'nt' else "clear")
+        elif cmd == 'help me' or cmd == 'help':
+            print("""\tFollowing commands are available for GRAFTY\n1. plot\n2. bar\n3. pie\n4. box\n5. histogram\n6. scatter\n7. help\n8. exit """)
+        elif cmd == 'leave' or cmd == 'exit':
+            break
 
 #apply prediction stuff here 
 ###################################
@@ -344,7 +421,7 @@ data = getFile()
 
 while True:
     try:
-        inp = input(getPrompt())
+        inp = input(getPrompt()+" >>\b\b\b\b\b\b")
         if inp == 'mean':
             mean(data)
         elif inp == 'head':
@@ -373,19 +450,23 @@ while True:
             LogisticReg(data)
         elif inp == 'learn':
             tutor()
+        elif inp == 'grafty':
+            grafty(data)
         elif inp == 'changeFile':
             data = getFile()
         elif inp == 'clear':
             os.system('cls' if os.name == 'nt' else 'clear')
         elif inp == 'ls' or inp == 'dir':
             os.system('dir' if os.name == 'nt' else 'ls -al')
+        elif inp == 'brainwave' or inp == 'brain':
+            fl = open('./assets/brain.txt','r').read()
+            print(fl) 
         elif inp == 'showna' or inp == 'show na' or inp == 'showNA':
             showNull(data)
         elif inp == 'help' or inp == 'help me' or inp == 'please help' or inp == 'Help':
             print("""
                 Usage: following commands can be executed from this script
-                \n\t1. mean\n\t2. head\n\t3. tail\n\t4. describe\n\t5. showNA\n\t6. show columns\n\t7. models\n\t8. median\n\t9. info\n\t10. learn\n\t
-                11. linearReg\n\t12. polynomReg\n\t13. ridgeReg\n\t14. lassoReg\n\t15. logisticReg
+                \n\t1. mean\n\t2. head\n\t3. tail\n\t4. describe\n\t5. show na\n\t6. show columns\n\t7. models\n\t8. median\n\t9. info\n\t10. learn\n\t11. linearReg\n\t12. polynomReg\n\t13. ridgeReg\n\t14. lassoReg\n\t15. logisticReg
             """)
         elif inp == '':
             print("huh how many times i told you that you must have to enter commands here don't you just understand")
