@@ -86,36 +86,49 @@ def grafty(data):
     ##########################
     ##    definations       ##
     ##########################
-    def plotGraph(data):
-        colx = input("enter the column for X-axis : ==> ")
-        coly = input("enter the column for Y-axis : ==> ")
-        
-        plt.ion()
-        plt.plot(data[colx],data[coly])
-        plt.show(block=False)
-    
-    def barGraph(data):
-        colx = input("enter the column for X-axis : ==> ")
-        coly = input("enter the column for Y-axis : ==> ")
+    def getInput():
+        colx = input("Enter X-axis column: ")
+        coly = input("Enter Y-axis column: ")
+        return colx,coly
 
+    def plotGraph(data):
+        colx,coly = getInput()
         plt.ion()
-        plt.bar(range(len(data[colx])),data[colx])
-        plt.xticks(range(len(data[colx])),data[coly])
+        plt.plot(data[colx], data[coly])
+        plt.show(block=False)
+
+    def barGraph(data):
+        colx,coly = getInput()
+        plt.ion()
+        plt.bar(range(len(data[colx])), data[coly])
+        plt.xticks(range(len(data[colx])), data[colx])
         plt.xlabel(colx)
         plt.ylabel(coly)
         plt.show(block=False)
 
     def pieGraph(data):
-        print('plot it')
+        col = input("enter the column: ")
+        plt.ion()
+        plt.pie(data[col])
+        plt.show(block=False)
 
     def boxGraph(data):
-        print('plot it')
+        col = input("enter the column: ")
+        plt.ion()
+        plt.boxplot(data[col])
+        plt.show(block=False)
 
     def histoGraph(data):
-        print('plot it')
+        col = input("enter the column: ")
+        plt.ion()
+        plt.hist(data[col])
+        plt.show(block=False)
 
     def scatterGraph(data):
-        print('plot it')
+        colx,coly = getInput()
+        plt.ion()
+        plt.scatter(data[colx], data[coly])
+        plt.show(block=False)
     ##########################
     ##    /definations      ##
     ##########################
@@ -406,6 +419,11 @@ def models(data):
 ##        /predictions           ##
 ###################################
 
+###################################
+##        classification        ##
+###################################
+def classify():
+    print("")
 
 
 # Print the ASCII art of the brain
@@ -454,6 +472,8 @@ while True:
             grafty(data)
         elif inp == 'changeFile':
             data = getFile()
+        elif inp = 'classification':
+            classify()
         elif inp == 'clear':
             os.system('cls' if os.name == 'nt' else 'clear')
         elif inp == 'ls' or inp == 'dir':
