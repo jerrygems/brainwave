@@ -426,6 +426,11 @@ def classify():
     print("")
 
 
+###################################
+##       /classification         ##
+###################################
+
+
 # Print the ASCII art of the brain
 # with open('assets/brain.txt', 'r') as file:
 #     print(file.read())
@@ -472,7 +477,7 @@ while True:
             grafty(data)
         elif inp == 'changeFile':
             data = getFile()
-        elif inp = 'classification':
+        elif inp == 'classification':
             classify()
         elif inp == 'clear':
             os.system('cls' if os.name == 'nt' else 'clear')
@@ -486,7 +491,8 @@ while True:
         elif inp == 'help' or inp == 'help me' or inp == 'please help' or inp == 'Help':
             print("""
                 Usage: following commands can be executed from this script
-                \n\t1. mean\n\t2. head\n\t3. tail\n\t4. describe\n\t5. show na\n\t6. show columns\n\t7. models\n\t8. median\n\t9. info\n\t10. learn\n\t11. linearReg\n\t12. polynomReg\n\t13. ridgeReg\n\t14. lassoReg\n\t15. logisticReg
+                \n\t1. mean\n\t2. head\n\t3. tail\n\t4. describe\n\t5. show na\n\t6. show columns\n\t7. models\n\t8. median\n\t9. info\n\t10. learn
+        11. linearReg\n\t12. polynomReg\n\t13. ridgeReg\n\t14. lassoReg\n\t15. logisticReg\n\t16. grafty\n\t17. changeFile
             """)
         elif inp == '':
             print("huh how many times i told you that you must have to enter commands here don't you just understand")
@@ -498,3 +504,5 @@ while True:
     except Exception as err:
         print(f"Sorry, the following error occurred: {err}")
         continue
+
+# "C:\Users\shubh\Downloads\speed.csv"
